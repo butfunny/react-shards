@@ -4,6 +4,7 @@ import classnames from "classnames";
 import update from "react-addons-update";
 import {dragRangeService} from "../single/slider";
 import PropTypes from 'prop-types';
+
 export class MultipleSlider extends React.Component {
 
     constructor(props) {
