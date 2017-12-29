@@ -1,6 +1,6 @@
 import React from "react";
 import {Slider} from "./slider/single/slider";
-import {MultipleSlider} from "./slider/multiple/multiple-slider";
+import {RangeSlider} from "./slider/multiple/range-slider";
 
 export class ReactShardsApp extends React.Component {
 
@@ -28,7 +28,7 @@ export class ReactShardsApp extends React.Component {
                     {/*onChange={(value) => this.setState({value})}*/}
                 {/*/>*/}
 
-                <MultipleSlider
+                <RangeSlider
                     max={10}
                     min={1}
                     value={multipleValue}

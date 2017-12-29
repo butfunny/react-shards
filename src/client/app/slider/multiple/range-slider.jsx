@@ -5,7 +5,7 @@ import update from "react-addons-update";
 import {dragRangeService} from "../single/slider";
 import PropTypes from 'prop-types';
 
-export class MultipleSlider extends React.Component {
+export class RangeSlider extends React.Component {
 
     constructor(props) {
         super(props);
@@ -60,7 +60,7 @@ export class MultipleSlider extends React.Component {
         let {grabbing, lastGrab} = this.state;
 
         return (
-            <div className="multiple-slider slider">
+            <div className="range-slider slider">
                 <div
                     className={classnames("drag-circle", grabbing == "from" && "grabbing")}
                     style={{
