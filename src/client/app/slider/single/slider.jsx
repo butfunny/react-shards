@@ -18,11 +18,9 @@ export class Slider extends React.Component {
 
     startDrag() {
         const { min, max} = this.props;
-
-        $("body").css({cursor: "-webkit-grabbing"});
         this.setState({grabbing: true});
 
-        var elem = $(ReactDOM.findDOMNode(this));
+        let elem = $(ReactDOM.findDOMNode(this));
         dragRangeService.onDrag(elem.offset().left, elem.width(), (ratio)=> {
             this.props.onChange((max-min) *ratio + min);
         });
@@ -55,7 +53,7 @@ export class Slider extends React.Component {
 }
 
 let listeners = [];
-const dragRangeService = {
+export const dragRangeService = {
     onDrag(left, width, cb) {
         let last = null;
         const getCurrent = (clientX) => {
@@ -67,15 +65,15 @@ const dragRangeService = {
             }
             return (clientX - left) / width;
         };
-        var listener = (e)=> {
-            var clientX = e.clientX;
-            var value = getCurrent(clientX);
+        let listener = (e)=> {
+            let clientX = e.clientX;
+            let value = getCurrent(clientX);
             if (last == null || last != value) {
                 last = value;
                 cb(value);
             }
         };
-        var $window = $(window);
+        let $window = $(window);
         $window.on("mousemove", listener);
         $window.one("mouseup", ()=> {
             listeners.forEach((l) => l());
