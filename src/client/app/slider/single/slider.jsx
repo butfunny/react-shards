@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
-
 export class Slider extends React.Component {
 
     constructor(props){
@@ -12,14 +11,12 @@ export class Slider extends React.Component {
 
         dragRangeService.onDrop(() => {
             this.setState({grabbing: false});
-            $("body").css({cursor: ""});
         })
     }
 
     startDrag() {
         const { min, max} = this.props;
         this.setState({grabbing: true});
-
         let elem = $(ReactDOM.findDOMNode(this));
         dragRangeService.onDrag(elem.offset().left, elem.width(), (ratio)=> {
             this.props.onChange((max-min) *ratio + min);

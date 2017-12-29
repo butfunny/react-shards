@@ -9,8 +9,8 @@ export class ReactShardsApp extends React.Component {
         this.state = {
             value: 50,
             multipleValue: {
-                from: 20,
-                to: 40
+                from: 2,
+                to: 5
             }
         };
     }
@@ -29,8 +29,8 @@ export class ReactShardsApp extends React.Component {
                 {/*/>*/}
 
                 <MultipleSlider
-                    max={100}
-                    min={0}
+                    max={10}
+                    min={1}
                     value={multipleValue}
                     onChange={(multipleValue) => this.setState({multipleValue})}
                 />
