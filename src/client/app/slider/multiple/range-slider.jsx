@@ -55,7 +55,7 @@ export class RangeSlider extends React.Component {
     render() {
 
 
-        let {value, max, min} = this.props;
+        let {value, max, min, tooltip} = this.props;
 
         let {grabbing, lastGrab} = this.state;
 
@@ -68,7 +68,9 @@ export class RangeSlider extends React.Component {
                         zIndex: `${lastGrab == "from" ? 3 : 2}`
                     }}
                     onMouseDown={(e)=> {e.preventDefault(); this.startDrag("from"); this.setState({lastGrab: "from"})} }
-                />
+                >
+                    { tooltip && <div className="tooltip">{value.from.toFixed(2)}</div>}
+                </div>
 
                 <div
                     className={classnames("drag-circle", grabbing == "to" && "grabbing")}
@@ -77,7 +79,9 @@ export class RangeSlider extends React.Component {
                         zIndex: `${lastGrab == "to" ? 3 : 2}`
                     }}
                     onMouseDown={(e)=> {e.preventDefault(); this.startDrag("to"); this.setState({lastGrab: "to"})} }
-                />
+                >
+                    { tooltip && <div className="tooltip">{value.to.toFixed(2)}</div>}
+                </div>
                 
                 <div className="slider-connect"
                     style={{
@@ -91,7 +95,7 @@ export class RangeSlider extends React.Component {
     }
 }
 
-MultipleSlider.propTypes = {
+RangeSlider.propTypes = {
     onChange: PropTypes.func.isRequired,
     max: PropTypes.number.isRequired,
     min: PropTypes.number.isRequired,

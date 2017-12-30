@@ -21,19 +21,21 @@ export class ReactShardsApp extends React.Component {
 
         return (
             <div className="react-shards-app">
-                {/*<Slider*/}
-                    {/*max={100}*/}
-                    {/*min={0}*/}
-                    {/*value={this.state.value}*/}
-                    {/*onChange={(value) => this.setState({value})}*/}
-                {/*/>*/}
-
-                <RangeSlider
-                    max={10}
-                    min={1}
-                    value={multipleValue}
-                    onChange={(multipleValue) => this.setState({multipleValue})}
+                <Slider
+                    tooltip
+                    max={100}
+                    min={0}
+                    value={this.state.value}
+                    onChange={(value) => this.setState({value})}
                 />
+
+                {/*<RangeSlider*/}
+                    {/*tooltip*/}
+                    {/*max={10}*/}
+                    {/*min={1}*/}
+                    {/*value={multipleValue}*/}
+                    {/*onChange={(multipleValue) => this.setState({multipleValue})}*/}
+                {/*/>*/}
             </div>
         );
     }

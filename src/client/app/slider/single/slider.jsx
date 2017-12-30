@@ -32,6 +32,7 @@ export class Slider extends React.Component {
     render() {
 
         let {grabbing} = this.state;
+        let {tooltip, value} = this.props;
 
         return (
             <div className="slider" style={ {...this.props.style} }>
@@ -42,7 +43,7 @@ export class Slider extends React.Component {
                     }}
                     onMouseDown={(e)=> {e.preventDefault(); this.startDrag()} }
                 >
-
+                    { tooltip && <div className="tooltip">{value.toFixed(2)}</div> }
                 </div>
             </div>
         );
