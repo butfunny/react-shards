@@ -1,0 +1,44 @@
+.btn {
+  cursor pointer;
+  font-weight: 300;
+  border: 1px solid transparent;
+  padding: .75rem 1.25rem;
+  font-size: .875rem;
+  line-height: 1.1;
+  border-radius: .375rem;
+  transition: all 250ms cubic-bezier(.27,.01,.38,1.06);
+  outline 0;
+
+  &:hover {
+    color: #fff;
+  }
+
+
+
+  button(type, color, hoverColor, hoverBorderColor, boxShadow) {
+    &.btn-{type} {
+      background-color: color;
+      border-color: color;
+      box-shadow: none;
+      color: #fff;
+
+      &:hover {
+        background-color: hoverColor;
+        border-color: hoverBorderColor;
+        box-shadow: 0 5px 15px rgba(0,0,0,.05), 0 4px 10px boxShadow;
+      }
+    }
+
+
+  }
+
+  button("primary", #007bff, #006fe6, #007bff, rgba(0,123,255,.25));
+  button("secondary", #5a6169, #4e545b, #5a6169, rgba(90,97,105,.25));
+  button("success", #17c671, #14af64, #17c671, rgba(23,198,113,.25));
+  button("danger", #c4183c, #ad1535, #c4183c, rgba(196,24,60,.25));
+  button("warning", #ffb400, #e6a200, #ffb400, rgba(255,180,0,.25));
+  button("info", #00b8d8, #00a2bf, #00b8d8, rgba(0,184,216,.25));
+
+
+
+}
