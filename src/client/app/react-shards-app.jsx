@@ -1,7 +1,7 @@
 import React from "react";
-import {Slider} from "./slider/single/slider";
-import {RangeSlider} from "./slider/multiple/range-slider";
-import {modals, ModalsRegistry} from "./modal/modals";
+import {Slider} from "./components/slider/single/slider";
+import {RangeSlider} from "./components/slider/multiple/range-slider";
+import {modals, ModalsRegistry} from "./components/modal/modals";
 
 export class ReactShardsApp extends React.Component {
 
@@ -64,13 +64,13 @@ export class ReactShardsApp extends React.Component {
                     className="btn btn-primary"
                     onClick={() => this.openModal()}>Click me</button>
 
-                {/*<RangeSlider*/}
-                    {/*tooltip*/}
-                    {/*max={10}*/}
-                    {/*min={1}*/}
-                    {/*value={multipleValue}*/}
-                    {/*onChange={(multipleValue) => this.setState({multipleValue})}*/}
-                {/*/>*/}
+                <RangeSlider
+                    tooltip
+                    max={10}
+                    min={1}
+                    value={multipleValue}
+                    onChange={(multipleValue) => this.setState({multipleValue})}
+                />
 
                 <ModalsRegistry />
             </div>

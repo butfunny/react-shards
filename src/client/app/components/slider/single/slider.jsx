@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
+import {dragRangeService} from "../../../common/drag-range-service";
 export class Slider extends React.Component {
 
     constructor(props){
@@ -14,14 +15,18 @@ export class Slider extends React.Component {
         })
     }
 
-    startDrag() {
+    startDrag(type) {
         const { min, max} = this.props;
         this.setState({grabbing: true});
         let elem = $(ReactDOM.findDOMNode(this));
-        dragRangeService.onDrag(elem.offset().left, elem.width(), (ratio)=> {
+
+        let dragFunc = type == "mobile" ? dragRangeService.onMobileDrag : dragRangeService.onDrag;
+
+        dragFunc(elem.offset().left, elem.width(), (ratio)=> {
             this.props.onChange((max-min) *ratio + min);
         });
     }
+
 
     pos() {
         const {value, min, max} = this.props;
@@ -41,7 +46,8 @@ export class Slider extends React.Component {
                     style={{
                         left: `calc(${this.pos()*100}% - 12px)`
                     }}
-                    onMouseDown={(e)=> {e.preventDefault(); this.startDrag()} }
+                    onMouseDown={(e)=> {e.preventDefault(); this.startDrag("desktop")} }
+                    onTouchStart={(e) => {e.preventDefault(); this.startDrag("mobile")}}
                 >
                     { tooltip && <div className="tooltip">{value.toFixed(2)}</div> }
                 </div>
@@ -50,35 +56,4 @@ export class Slider extends React.Component {
     }
 }
 
-let listeners = [];
-export const dragRangeService = {
-    onDrag(left, width, cb) {
-        let last = null;
-        const getCurrent = (clientX) => {
-            if (clientX < left) {
-                return 0;
-            }
-            if (clientX > left + width) {
-                return 1;
-            }
-            return (clientX - left) / width;
-        };
-        let listener = (e)=> {
-            let clientX = e.clientX;
-            let value = getCurrent(clientX);
-            if (last == null || last != value) {
-                last = value;
-                cb(value);
-            }
-        };
-        let $window = $(window);
-        $window.on("mousemove", listener);
-        $window.one("mouseup", ()=> {
-            listeners.forEach((l) => l());
-            $window.off("mousemove", listener);
-        });
-    },
-    onDrop: (e) => {
-        listeners.push(e);
-    }
-};
+

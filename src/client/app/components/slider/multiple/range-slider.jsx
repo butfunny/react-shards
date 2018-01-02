@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
 import update from "react-addons-update";
-import {dragRangeService} from "../single/slider";
 import PropTypes from 'prop-types';
+import {dragRangeService} from "../../../common/drag-range-service";
 
 export class RangeSlider extends React.Component {
 
@@ -20,13 +20,16 @@ export class RangeSlider extends React.Component {
 
     }
 
-    startDrag(type) {
+    startDrag(type, responsive) {
         const { min, max, value} = this.props;
 
         this.setState({grabbing: type});
 
         let elem = $(ReactDOM.findDOMNode(this));
-        dragRangeService.onDrag(elem.offset().left, elem.width(), (ratio)=> {
+
+        let dragFunc = responsive == "desktop" ? dragRangeService.onDrag : dragRangeService.onMobileDrag
+
+        dragFunc(elem.offset().left, elem.width(), (ratio)=> {
 
             let sliderValue = (max-min) *ratio + min;
 
@@ -67,7 +70,8 @@ export class RangeSlider extends React.Component {
                         left: `calc(${this.pos("from")*100}% - 12px)`,
                         zIndex: `${lastGrab == "from" ? 3 : 2}`
                     }}
-                    onMouseDown={(e)=> {e.preventDefault(); this.startDrag("from"); this.setState({lastGrab: "from"})} }
+                    onMouseDown={(e)=> {e.preventDefault(); this.startDrag("from", "desktop"); this.setState({lastGrab: "from"})} }
+                    onTouchStart={(e)=> {e.preventDefault(); this.startDrag("from", "mobile"); this.setState({lastGrab: "from"})} }
                 >
                     { tooltip && <div className="tooltip">{value.from.toFixed(2)}</div>}
                 </div>
@@ -78,7 +82,8 @@ export class RangeSlider extends React.Component {
                         left: `calc(${this.pos("to")*100}% - 12px)`,
                         zIndex: `${lastGrab == "to" ? 3 : 2}`
                     }}
-                    onMouseDown={(e)=> {e.preventDefault(); this.startDrag("to"); this.setState({lastGrab: "to"})} }
+                    onMouseDown={(e)=> {e.preventDefault(); this.startDrag("to", "desktop"); this.setState({lastGrab: "to"})} }
+                    onTouchStart={(e)=> {e.preventDefault(); this.startDrag("to", "mobile"); this.setState({lastGrab: "to"})} }
                 >
                     { tooltip && <div className="tooltip">{value.to.toFixed(2)}</div>}
                 </div>
