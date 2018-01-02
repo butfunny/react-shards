@@ -53,6 +53,7 @@
     background rgba(black, 20%)
     overflow-y auto
     z-index 20
+
   }
 
   .modal-box {
@@ -63,7 +64,11 @@
 
     margin 100px auto 0 auto;
     border-radius 3px
-    width 500px;
+    width calc(100% - 10px);
+
+    @media (min-width 769px) {
+      width 500px;
+    }
 
     .modal-header {
       padding: 15px 35px;
